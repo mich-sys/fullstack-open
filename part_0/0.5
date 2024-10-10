@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+
+    User->>Browser: Enter URL https://studies.cs.helsinki.fi/exampleapp/spa
+    Browser->>Server: HTTP GET /exampleapp/spa
+    Server-->>Browser: HTML file
+    Browser->>Server: HTTP GET /exampleapp/main.css
+    Server-->>Browser: main.css
+    Browser->>Server: HTTP GET /exampleapp/spa.js
+    Server-->>Browser: spa.js
+    Browser->>Server: HTTP GET /exampleapp/data.json
+    Server-->>Browser: data.json
+    Browser->>User: Render SPA with notes

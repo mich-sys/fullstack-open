@@ -29,3 +29,23 @@
 |   User's Browser  |       |   SPA Server      |       |   Backend Server  |
 |                   |       |                   |       |                   |
 +-------------------+       +-------------------+       +-------------------+
+
+Line-by-line explanation:
+- Lines 1-5:  Box headers — three columns represent the three actors:
+              "User's Browser" (the client), "SPA Server" (serves static files),
+              and "Backend Server" (serves dynamic data).
+- Line 6:     Vertical lines (|) drop down from each actor, representing the
+              passage of time / the actor's lifeline.
+- Lines 7-8:  Step 1 — The user navigates to the SPA URL. The browser sends an
+              HTTP GET request to the SPA Server (arrow: +---->).
+- Lines 9-12: Step 2 — The SPA Server responds with the HTML, CSS, and JS files
+              needed to run the single-page application. The arrow points right
+              toward the Backend Server column to show the response travels back.
+- Lines 13-17:Step 3 — Once the JS bundle is loaded the browser (SPA) sends an
+              API request to fetch the notes data from the Backend Server.
+- Lines 18-21:Step 4 — The Backend Server answers with a JSON payload containing
+              the notes.
+- Lines 22-25:Step 5 — The SPA JavaScript uses the received JSON to render the
+              notes list directly in the browser without a full page reload.
+              The arrow points left (+<---) back to the browser column.
+- Lines 26-31:Box footers — repeat the actor labels to close the diagram.

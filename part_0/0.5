@@ -1,15 +1,26 @@
 sequenceDiagram
+    %% Declare the three participants (actors) in this diagram
     participant User
     participant Browser
     participant Server
 
+    %% The user types the SPA URL into the browser and presses Enter
     User->>Browser: Enter URL https://studies.cs.helsinki.fi/exampleapp/spa
+    %% Browser sends a GET request to the server for the SPA page
     Browser->>Server: HTTP GET /exampleapp/spa
+    %% Server responds with the initial HTML file for the SPA
     Server-->>Browser: HTML file
+    %% Browser parses the HTML and fetches the linked CSS stylesheet
     Browser->>Server: HTTP GET /exampleapp/main.css
+    %% Server returns the CSS file
     Server-->>Browser: main.css
+    %% Browser fetches the SPA-specific JavaScript bundle
     Browser->>Server: HTTP GET /exampleapp/spa.js
+    %% Server returns the JavaScript file that drives the single-page app
     Server-->>Browser: spa.js
+    %% The SPA JavaScript runs and fetches the notes data from the server
     Browser->>Server: HTTP GET /exampleapp/data.json
+    %% Server returns the notes as a JSON array
     Server-->>Browser: data.json
+    %% The SPA renders the notes in the browser without a full page reload
     Browser->>User: Render SPA with notes

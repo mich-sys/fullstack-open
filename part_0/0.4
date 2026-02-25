@@ -1,37 +1,55 @@
 sequenceDiagram
+    %% Declare the two participants (actors) in this diagram
     participant browser
     participant server
 
+    %% Annotation: the user action that triggers the sequence
     Note right of browser: User writes a new note and clicks the Save button
 
+    %% Browser sends a POST request with the new note data to the server
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    %% Mark the server as active (processing the request)
     activate server
+    %% Annotation: the server stores the new note
     Note right of server: Server processes the new note and saves it
+    %% Server replies with a redirect, telling the browser to navigate to the notes page
     server-->>browser: Redirect to https://studies.cs.helsinki.fi/exampleapp/notes
+    %% Mark the server as no longer active
     deactivate server
 
+    %% Annotation: the browser follows the redirect and reloads the full notes page
     Note right of browser: Browser reloads the notes page
 
+    %% Browser requests the HTML for the notes page
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
+    %% Server returns the HTML document
     server-->>browser: HTML document
     deactivate server
 
+    %% Browser requests the CSS stylesheet referenced in the HTML
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
+    %% Server returns the CSS file so the page can be styled
     server-->>browser: the css file
     deactivate server
 
+    %% Browser requests the JavaScript file referenced in the HTML
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     activate server
+    %% Server returns the JavaScript file
     server-->>browser: the JavaScript file
     deactivate server
 
+    %% Annotation: the downloaded JS runs and immediately requests the notes data
     Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
 
+    %% JavaScript makes an AJAX/fetch GET request to retrieve notes as JSON
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
+    %% Server returns the notes array as JSON
     server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
     deactivate server
 
+    %% Annotation: JS callback renders the received notes into the DOM
     Note right of browser: The browser executes the callback function that renders the notes
